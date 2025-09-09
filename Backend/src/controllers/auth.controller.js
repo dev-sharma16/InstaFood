@@ -11,13 +11,16 @@ const userReturnObject = (user) => {
         fullName: user.fullName,
         username: user.username,
         email: user.email,
+        phone: user.phone,
+        address: user.address,
+        role: user.role
     }
 }
 
 //* User Auth api's
 async function registerUser(req, res) {
-    const { fullName, username, email, password } = req.body;
-    if(!fullName || !username || !email || !password){
+    const { fullName, username, email, password, phone, address } = req.body;
+    if(!fullName || !username || !email || !password || !phone || !address ){
         return res
         .status(400)
         .json({
@@ -42,7 +45,10 @@ async function registerUser(req, res) {
         fullName: fullName,
         username: username,
         email: email,
-        password: hashedPassword
+        password: hashedPassword,
+        phone: phone,
+        address: address,
+        role: "user"
     });
     if(!userCreated){
         return res
@@ -125,8 +131,8 @@ async function logoutUser(req,res) {
 
 //* Food Partner Auth api's
 async function registerFoodPartner(req, res) {
-    const { name, username, email, password } = req.body;
-    if(!name || !username || !email || !password){
+    const { name, username, email, password, phone, address } = req.body;
+    if(!name || !username || !email || !password || !phone || !address){
         return res
         .status(400)
         .json({
@@ -151,7 +157,10 @@ async function registerFoodPartner(req, res) {
         name: name,
         username: username,
         email: email,
-        password: hashedPassword
+        password: hashedPassword,
+        phone: phone,
+        address: address,
+        role: "foodPartner"
     });
     if(!foodPartner){
         return res

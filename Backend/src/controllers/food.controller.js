@@ -1,10 +1,10 @@
 const Food = require("../models/food.model");
 const storageService = require("../services/storage.service");
-//todo: test api create food
+
 async function createFood(req, res) {
-    const user = req.user;
+    const foodPartner = req.foodPartner;
     const { name, description } = req.body;
-    const { video } = req.file;
+    const video = req.file;
     if(!name || !video){
         return res
         .status(400)
@@ -29,7 +29,7 @@ async function createFood(req, res) {
         video: uploadedFile.url,
         videoId: uploadedFile.fileId,
         description: description,
-        foodPartner: user._id
+        foodPartner: foodPartner._id
     })
     if(!createdFood){
         return res
@@ -45,12 +45,12 @@ async function createFood(req, res) {
     .json({
         success: true,
         message: "Food is added successfully",
-        food: createFood
+        food: createdFood
     })
 }
 
 async function getFood(req, res) {
-    const foodItems = await foodModle.find({})
+    const foodItems = await Food.find({})
     if(!foodItems){
         return res
         .status(500)
