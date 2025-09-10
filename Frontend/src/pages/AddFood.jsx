@@ -78,7 +78,7 @@ function AddFood() {
               type="file"
               accept="video/*"
               {...register("video", { required: "Video is required" })}
-              className="block w-full text-sm text-gray-900 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-md cursor-pointer bg-gray-50 dark:bg-gray-700 focus:outline-none"
+              className="block w-full text-sm text-gray-900 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-md cursor-pointer bg-gray-50 dark:bg-gray-700 focus:outline-none p-3"
             />
             {errors.video && (
               <p className="text-red-500 text-xs mt-1">

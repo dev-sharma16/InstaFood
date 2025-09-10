@@ -59,7 +59,7 @@ function VideoCard({ video }) {
         <p className="text-sm opacity-80">{video.description}</p>
       </div>
         <button
-          onClick={() => navigate(`/partner/${video.foodPartner}`)}
+          onClick={() => navigate(`/food-partner/${video.foodPartner}`)}
           className="mt-2 px-3 py-1 bg-blue-600 rounded-md text-sm hover:bg-blue-700"
         >
           Show Details
