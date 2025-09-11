@@ -16,11 +16,38 @@ router.post(
     foodController. createFood
 );
 
-// for normal user to see video and food details
+// for normal user to see videos and foods details
 router.get(
     "/", 
     authMiddleware.authUserMiddleware,  
     foodController.getFood
+)
+
+// for normal user to see video and food details
+router.get(
+    "/:id", 
+    authMiddleware.authUserMiddleware,  
+    foodController.getFoodById
+)
+
+// for liking video
+router.post(
+    "/like",
+    authMiddleware.authUserMiddleware,
+    foodController.likeFood
+)
+
+// for saving the food post
+router.post(
+    "/save",
+    authMiddleware.authUserMiddleware,
+    foodController.saveFood
+)
+
+router.get(
+    "/save",
+    authMiddleware.authUserMiddleware,
+    foodController.getSavedFood
 )
 
 module.exports = router;
