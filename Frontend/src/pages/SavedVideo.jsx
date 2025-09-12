@@ -1,21 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import axios from '../axios/config'
+import { useNavigate } from 'react-router-dom';
 
 function SavedVideo() {
   const [savedVideos, setSavedVideos] = useState([])
+  
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchSavedVideos = async () => {
       try {
         const res = await axios.get(`/food/save`)
-        // console.log(res.data.videos)
+        console.log(res)
         setSavedVideos(res.data.videos)
       } catch (error) {
         console.error('Error in loading saved videos: ', error)
       }
     }
     fetchSavedVideos()
-  }, [])
+  }, []);
+
+  const handleClick = (videoId) => {
+    navigate(`/saved/${videoId}`)
+  }
 
   return (
     <div className="p-4 dark:bg-gray-900 h-screen overflow-y-scroll">
@@ -25,11 +32,12 @@ function SavedVideo() {
 
       {/* Grid layout */}
       <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6  gap-2">
-        {savedVideos.length > 0 ? (
+        {savedVideos?.length > 0 ? (
           savedVideos.map((item) => (
             <div
               key={item._id}
               className="relative w-full aspect-[9/16] bg-black overflow-hidden rounded-md"
+              onClick={()=>{handleClick(item.food._id)}}
             >
               <video
                 src={item.food.video}
