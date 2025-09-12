@@ -102,9 +102,11 @@ async function getFoodById(req, res) {
   const userId = req.user?._id;
   const foodId = req.params.id;
 
+  const objectId = new mongoose.Types.ObjectId(foodId);
+
   const foodItem = await Food.aggregate([
       {
-        $match: { _id: foodId}
+        $match: { _id: objectId}
       },
       {
         $lookup: {
@@ -151,7 +153,7 @@ async function getFoodById(req, res) {
 
   return res.status(200).json({
     success: true,
-    message: "Food itme fetched successfully",
+    message: "Food item fetched successfully",
     foodItem: foodItem[0]
   });
 }

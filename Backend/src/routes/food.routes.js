@@ -23,13 +23,6 @@ router.get(
     foodController.getFood
 )
 
-// for normal user to see video and food details
-router.get(
-    "/:id", 
-    authMiddleware.authUserMiddleware,  
-    foodController.getFoodById
-)
-
 // for liking video
 router.post(
     "/like",
@@ -44,10 +37,19 @@ router.post(
     foodController.saveFood
 )
 
+// for geting all saved food videos of the user
 router.get(
     "/save",
     authMiddleware.authUserMiddleware,
     foodController.getSavedFood
+)
+
+//* paramterized routes
+// for normal user to see video and food details
+router.get(
+    "/:id", 
+    authMiddleware.authUserMiddleware,  
+    foodController.getFoodById
 )
 
 module.exports = router;
