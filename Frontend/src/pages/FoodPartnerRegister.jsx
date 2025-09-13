@@ -2,6 +2,9 @@ import axios from "../axios/config";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { userLogin } from "../store/authSlice";
+import { useNavigate } from "react-router-dom";
 
 function FoodPartnerRegister() {
   const {
@@ -10,15 +13,17 @@ function FoodPartnerRegister() {
     formState: { errors },
   } = useForm();
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const onSubmit = async(data) => {
-    console.log("Food Partner Register:", data); // Replace with API call
     const res = await axios.post("/auth/foodPartner/register", data)
     if(!res){
       alert("Error in register, try again later");
     }
-
-    console.log(res.data);
-    
+    dispatch(userLogin(res.data.food_partner))
+    navigate("/")
+    // console.log(res.data);
   };
 
   return (

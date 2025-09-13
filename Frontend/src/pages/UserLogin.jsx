@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "../axios/config";
 import { userLogin } from "../store/authSlice";
 import { useDispatch } from "react-redux";
@@ -12,7 +12,8 @@ function UserLogin() {
     formState: { errors },
   } = useForm();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onSubmit = async(data) => {
     const res = await axios.post("/auth/user/login", data)
@@ -20,7 +21,8 @@ function UserLogin() {
       alert("Error in login, try again later");
     }
     dispatch(userLogin(res.data.user))
-    console.log(res.data);
+    navigate("/")
+    // console.log(res.data);
   };
 
   return (
@@ -64,6 +66,12 @@ function UserLogin() {
           Don’t have an account?{" "}
           <Link to="/user/register" className="text-blue-600 hover:underline">
             Register
+          </Link>
+        </p>
+        <p className="mt-4 text-sm text-gray-600 dark:text-gray-400 text-center">
+          Are you Food Partner?{" "}
+          <Link to="/food-partner/login" className="text-green-600 hover:underline">
+            Sign in/Register
           </Link>
         </p>
       </div>

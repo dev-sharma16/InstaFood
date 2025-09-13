@@ -1,7 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "../axios/config";
+import { useDispatch } from "react-redux";
+import { userLogin } from "../store/authSlice";
 
 function UserRegister() {
   const {
@@ -10,14 +12,17 @@ function UserRegister() {
     formState: { errors },
   } = useForm();
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const onSubmit = async(data) => {
-    console.log("User Register:", data); // Replace with API call
     const res = await axios.post("/auth/user/register", data)
     if(!res){
       alert("Error in login, try again later");
     }
-
-    console.log(res.data);
+    dispatch(userLogin(res.data.user))
+    navigate("/")
+    // console.log(res.data);
   };
 
   return (
