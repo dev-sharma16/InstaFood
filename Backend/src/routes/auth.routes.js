@@ -1,5 +1,6 @@
 const express = require('express');
 const authController = require('../controllers/auth.controller');
+const authMiddleware = require('../middlewares/auth.middleware');
 
 const router = express.Router();
 
@@ -11,12 +12,14 @@ router.get('/', (req,res)=>{
 //* User Auth api's routes
 router.post("/user/register", authController.registerUser)
 router.post("/user/login", authController.loginUser)
-router.get("/user/logout", authController.logoutUser)
+router.post("/user/logout", authController.logoutUser)
+router.get("/user/", authMiddleware.authUserMiddleware, authController.currentUser)
 
 //* Food Partner Auth api's routes
 router.post("/foodPartner/register", authController.registerFoodPartner)
 router.post("/foodPartner/login", authController.loginFoodPartner)
 router.get("/foodPartner/logout", authController.logoutFoodPartner)
+router.get("/foodPartner/", authMiddleware.authFoodMiddleware, authController.currentFoodPartner)
 
 
 module.exports = router;

@@ -129,6 +129,26 @@ async function logoutUser(req,res) {
     })
 }
 
+async function currentUser(req, res) {
+    const user = req.user;
+    if(!user){
+        return res
+        .status(400)
+        .json({
+            success: false,
+            mesage: "User is not logined in"
+        })
+    }
+
+    return res
+    .status(200)
+    .json({
+        success: true,
+        message: "User fetched succesfully",
+        user: user
+    })
+}
+
 //* Food Partner Auth api's
 async function registerFoodPartner(req, res) {
     const { name, username, email, password, phone, address } = req.body;
@@ -241,7 +261,27 @@ async function logoutFoodPartner(req,res) {
     })
 }
 
+async function currentFoodPartner(req, res) {
+    const foodPartner = req.foodPartner;
+    if(!foodPartner){
+        return res
+        .status(400)
+        .json({
+            success: false,
+            mesage: "Food Partner is not logined in"
+        })
+    }
+
+    return res
+    .status(200)
+    .json({
+        success: true,
+        message: "Food Partner fetched succesfully",
+        foodPartner: foodPartner
+    })
+}
+
 module.exports = { 
-    registerUser, loginUser, logoutUser, 
-    registerFoodPartner, loginFoodPartner, logoutFoodPartner
+    registerUser, loginUser, logoutUser, currentUser,
+    registerFoodPartner, loginFoodPartner, logoutFoodPartner, currentFoodPartner
 };
