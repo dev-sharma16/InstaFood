@@ -34,7 +34,7 @@ function Navbar() {
 
         {/* Profile (dummy for now) */}
         <NavLink
-          to="/allForms"
+          to="/user"
           className={({ isActive }) =>
             `${baseStyle} ${isActive ? activeStyle : inactiveStyle}`
           }

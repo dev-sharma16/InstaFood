@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Volume2, VolumeOff, Heart, Bookmark } from 'lucide-react';
 import axios from "../axios/config";
-//todo: make an video component fro profile and saved page so if we click on the component it open an particular video
+
 function VideoCard({ video }) {
   const videoRef = useRef(null);
   const [isMuted, setIsMuted] = useState(true);
@@ -48,14 +48,14 @@ function VideoCard({ video }) {
   const handleLike = async () => {
     try {
       const res = await axios.post(`/food/like`,{ foodId: video._id });
-      console.log(res.data);
+      // console.log(res.data);
       
       setLiked(!liked);
       setLikes((prev) => (liked ? prev - 1 : prev + 1));
     } catch (err) {
       console.error("Error liking video:", err);
     }
-  };
+  }; 
 
   const handleSave = async () => {
     try {
