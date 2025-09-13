@@ -11,7 +11,7 @@ function SavedVideo() {
     const fetchSavedVideos = async () => {
       try {
         const res = await axios.get(`/food/save`)
-        console.log(res)
+        // console.log(res)
         setSavedVideos(res.data.videos)
       } catch (error) {
         console.error('Error in loading saved videos: ', error)

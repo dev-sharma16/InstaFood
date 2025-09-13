@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "../axios/config";
+import { useNavigate } from "react-router-dom"
 
 function AddFood() {
   const {
@@ -9,6 +10,8 @@ function AddFood() {
     formState: { errors },
     reset
   } = useForm();
+
+  const navigate = useNavigate()
 
   const onSubmit = async(data) => {
     // data will include name, description, and video file
@@ -20,9 +23,12 @@ function AddFood() {
     formData.append("video", data.video[0]);
 
     // example axios POST
-    const creartedFood = await axios.post("/food", formData);
-    console.log("Food Added: ",creartedFood);
-    reset();
+    const createdFood = await axios.post("/food", formData);
+    // console.log("Food Added: ",creartedFood);
+    if(createdFood.success){
+      navigate('/')
+      reset();
+    }
   };
 
   return (

@@ -10,8 +10,8 @@ function Home() {
       try {
         const res = await axios.get("/food");
         if (!res) throw new Error("Error in loading post");
-
         setVideos(res.data.foodItems);
+        // console.log(res.data.foodItems);
       } catch (err) {
         console.error(err);
       }
